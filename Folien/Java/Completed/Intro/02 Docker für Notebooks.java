@@ -16,7 +16,7 @@
 //
 // ```bash
 // docker pull mhoelzl/cam-notebook:latest
-// docker run -p 8888:8888 -v $PATH_TO_SLIDES:/root/course mhoelzl/cam-cpp-notebook:latest
+// docker run -p 8888:8888 -v $PATH_TO_SLIDES:/root/course mhoelzl/cam-notebook:latest
 // ```
 //
 // - `$PATH_TO_SLIDES` ist der absolute Pfad zu dem Ordner, der die Folien enthält
