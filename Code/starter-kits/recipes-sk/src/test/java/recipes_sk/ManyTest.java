@@ -1,4 +1,6 @@
-import org.junit.jupiter.api.Nested;
+package recipes_sk;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -57,7 +59,6 @@ class ManyTest {
 
     @Test
     void getThingsThrowsStuff() {
-        assertThrows(RuntimeException.class,
-                () -> many.getThing("nonexistent recipe"));
+        assertThrows(RuntimeException.class, () -> many.getThing("nonexistent recipe"));
     }
 }

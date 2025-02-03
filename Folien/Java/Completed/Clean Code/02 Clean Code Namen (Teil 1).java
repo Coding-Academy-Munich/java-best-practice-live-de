@@ -29,12 +29,12 @@ double foo(double a, double b) {
 foo(40, 10)
 
 // %%
-public static final double REGULAR_PAY_PER_HOUR = 40.0;
-public static final double OVERTIME_PAY_PER_HOUR = 60.0;
-public static final double MAX_ALLOWED_OVERTIME = 40.0;
+final double REGULAR_PAY_PER_HOUR = 40.0;
+final double OVERTIME_PAY_PER_HOUR = 60.0;
+final double MAX_ALLOWED_OVERTIME = 40.0;
 
 // %%
-public static double computeTotalSalary(double regularHoursWorked, double overtimeHoursWorked) {
+double computeTotalSalary(double regularHoursWorked, double overtimeHoursWorked) {
     if (overtimeHoursWorked > MAX_ALLOWED_OVERTIME) {
         throw new IllegalArgumentException("Not allowed!");
     }
@@ -64,7 +64,10 @@ severity
 // - Wenig Bezug zum Typsystem
 
 // %%
-public static final int SEVERITY_HIGH = 30;
+final int SEVERITY_HIGH = 30;
+
+// %%
+severity = SEVERITY_HIGH;
 
 // %% [markdown]
 //
@@ -99,6 +102,9 @@ public static SimpleEntry<Integer, String> analyzeReview(String text) {
 
 // %%
 SimpleEntry<Integer, String> result = analyzeReview("Some review text");
+
+
+// %%
 System.out.println("Score: " + result.getKey() + ", Sentiment: " + result.getValue());
 
 
@@ -132,6 +138,22 @@ AnalysisResult analyzeReview(String text) {
 
 // %%
 AnalysisResult result = analyzeReview("Some review text");
+
+// %%
+System.out.println(result);
+
+// %%
+public record AnalysisResult(int score, String sentiment) {}
+
+// %%
+AnalysisResult analyzeReview(String text) {
+    return new AnalysisResult(5, "Overall positive");
+}
+
+// %%
+AnalysisResult result = analyzeReview("Some review text");
+
+// %%
 System.out.println(result);
 
 // %%
@@ -145,27 +167,7 @@ enum Score {
 }
 
 // %%
-public class AnalysisResult {
-    private Score score;
-    private String sentiment;
-
-    public AnalysisResult(Score score, String sentiment) {
-        this.score = score;
-        this.sentiment = sentiment;
-    }
-
-    public Score getScore() {
-        return score;
-    }
-
-    public String getSentiment() {
-        return sentiment;
-    }
-
-    public String toString() {
-        return "Score: " + getScore() + ", Sentiment: " + getSentiment();
-    }
-}
+public record AnalysisResult(Score score, String sentiment) {}
 
 // %%
 AnalysisResult analyzeReview(String text) {
@@ -174,6 +176,8 @@ AnalysisResult analyzeReview(String text) {
 
 // %%
 AnalysisResult result = analyzeReview("Some review text");
+
+// %%
 System.out.println(result);
 
 // %% [markdown]
