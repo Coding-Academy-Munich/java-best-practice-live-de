@@ -82,12 +82,12 @@
 
 // %%
 interface DataSource {
-    public int GetValue();
+    public int getValue();
 }
 
 // %%
 interface DataSink {
-    public void SetValue(int value);
+    public void setValue(int value);
 }
 
 // %%
@@ -100,29 +100,29 @@ class Processor {
         this.sink = sink;
     }
 
-    public void Process() {
-        int value = source.GetValue();
-        sink.SetValue(value);
+    public void process() {
+        int value = source.getValue();
+        sink.setValue(value);
     }
 }
 
 // %%
 class DataSourceStub implements DataSource {
-    public int GetValue() { return 42; }
+    public int getValue() { return 42; }
 }
 
 // %%
 public class DataSinkSpy implements DataSink
 {
-    public List<Integer> Values = new ArrayList<>();
+    public List<Integer> values = new ArrayList<>();
 
-    public void SetValue(int value) {
-        Values.add(value);
+    public void setValue(int value) {
+        values.add(value);
     }
 }
 
 // %%
-void Check(boolean condition) {
+void check(boolean condition) {
     if (!condition) {
         System.out.println("Test failed!");
     } else {
@@ -131,19 +131,19 @@ void Check(boolean condition) {
 }
 
 // %%
-void TestProcessor() {
+void testProcessor() {
     DataSourceStub source = new DataSourceStub();
     DataSinkSpy sink = new DataSinkSpy();
     Processor processor = new Processor(source, sink);
 
-    processor.Process();
+    processor.process();
 
-    Check(sink.Values.size() == 1);
-    Check(sink.Values.get(0) == 42);
+    check(sink.values.size() == 1);
+    check(sink.values.get(0) == 42);
 }
 
 // %%
-TestProcessor();
+testProcessor();
 
 // %% [markdown]
 //
@@ -164,13 +164,13 @@ TestProcessor();
 // %%
 public interface IService1
 {
-    int GetValue();
+    int getValue();
 }
 
 // %%
 public interface IService2
 {
-    void SetValue(int value);
+    void setValue(int value);
 }
 
 // %%
@@ -178,10 +178,10 @@ public void TestMe(int i, int j, IService1 service1, IService2 service2)
 {
     int value = 0;
     if (i > 0) {
-        value = service1.GetValue();
+        value = service1.getValue();
     }
     if (j > 0) {
-        service2.SetValue(value);
+        service2.setValue(value);
     }
 }
 
@@ -213,7 +213,7 @@ public void TestMe(int i, int j, IService1 service1, IService2 service2)
 // %%
 public class Service1Stub implements IService1
 {
-    public int GetValue() { return 42; }
+    public int getValue() { return 42; }
 }
 
 // %%
@@ -221,7 +221,7 @@ public class Service2Spy implements IService2
 {
     public List<Integer> Values = new ArrayList<>();
 
-    public void SetValue(int value) { Values.add(value); }
+    public void setValue(int value) { Values.add(value); }
 }
 
 // %%
@@ -235,8 +235,8 @@ public void TestTestMe_0_1()
 {
     Service2Spy service2 = new Service2Spy();
     TestMe(0, 1, null, service2);
-    Check(service2.Values.size() == 1);
-    Check(service2.Values.get(0) == 0);
+    check(service2.Values.size() == 1);
+    check(service2.Values.get(0) == 0);
 }
 
 // %%
@@ -252,6 +252,6 @@ public void TestTestMe_1_1()
     Service1Stub service1 = new Service1Stub();
     Service2Spy service2 = new Service2Spy();
     TestMe(1, 1, service1, service2);
-    Check(service2.Values.size() == 1);
-    Check(service2.Values.get(0) == 42);
+    check(service2.Values.size() == 1);
+    check(service2.Values.get(0) == 42);
 }
